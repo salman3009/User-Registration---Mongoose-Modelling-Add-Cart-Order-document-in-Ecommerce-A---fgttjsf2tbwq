@@ -19,7 +19,21 @@ Post request json file structure
 
 const registerUser =async (req, res) => {
 
-    //Write you code here
+    try{
+
+        let name = req.body.name;
+        let email = req.body.email;
+        let password = req.body.password;
+    
+        let result = new users({name,email,password});
+    
+        let finalResponse = await result.save();
+
+        res.send(finalResponse._id);
+    }
+    catch(err){
+        res.status(404).send(err.message);
+    }
 
 }
 
